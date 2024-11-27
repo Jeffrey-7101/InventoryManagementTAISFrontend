@@ -71,11 +71,11 @@ export class SalidasComponent implements OnInit {
   imprimirNota(id: string): void {
     this.salidaService.getNotaFile(id).subscribe(
       (file: Blob) => {
-        const blob = new Blob([file], { type: 'application/pdf' }); // Asumiendo que es un archivo PDF
+        const blob = new Blob([file], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `Nota_${id}.pdf`; // Nombre del archivo descargado
+        link.download = `Nota_${id}.xlsx`; // Nombre del archivo descargado
         link.click();
         window.URL.revokeObjectURL(url); // Liberar memoria
       },
