@@ -1,0 +1,39 @@
+<app-header-ingresos></app-header-ingresos>
+<div class="table-responsive mt-3">
+  <table class="table table-striped">
+    <thead class="table-primary">
+      <tr>
+        <th>COD</th>
+        <th>C. TOTAL</th>
+        <th>PRECIO TOTAL</th>
+        <th>FECHA</th>
+        <th>ACCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Nota001</td>
+        <td>20</td>
+        <td>20.00</td>
+        <td>01/01/2024</td>
+        <td>
+          <button class="btn btn-warning btn-sm">Modificar</button>
+          <button
+            class="btn btn-danger btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#deleteModal"
+            (click)="openDeleteConfirmation('Nota001')">
+            Eliminar
+          </button>
+          <button class="btn btn-secondary btn-sm">Imprimir</button>
+        </td>
+      </tr>
+  
+    </tbody>
+  </table>
+</div>
+<app-delete-confirmation
+  [title]="'Eliminar Nota de Ingreso'"
+  [message]="deleteMessage"
+  (confirm)="onDeleteConfirmed()"
+></app-delete-confirmation>

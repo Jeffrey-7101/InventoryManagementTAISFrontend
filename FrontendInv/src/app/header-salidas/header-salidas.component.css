@@ -1,0 +1,28 @@
+.header-salidas {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007bff; 
+    padding: 10px 20px;
+    color: white;
+    width: 100%; 
+    box-sizing: border-box; 
+  }
+  
+  .header-salidas h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .header-salidas button {
+    font-size: 1rem;
+    padding: 5px 15px;
+  }
+  button {
+    background-color: #28a745;
+    border-color: #28a745;
+    font-size: 1rem;
+  }
+  
+  

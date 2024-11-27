@@ -1,0 +1,102 @@
+<app-header></app-header>
+<div class="table-responsive mt-3">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>Acciones</th>
+      </tr>
+  
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.ProductID }}</td>
+        <td>{{ product.Name }}</td>
+        <td>{{ product.Quantity }}</td>
+        <td>{{ product.LastPrice }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm me-2" data-bs-toggle="modal"
+          data-bs-target="#editModal" (click)="editProduct(product.ProductID)">Modificar</button>
+          <button
+            class="btn btn-danger btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#deleteModal"
+            (click)="prepareDelete(product.ProductID)"
+          >
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-delete-confirmation
+  [title]="'Eliminar Producto'"
+  [message]="'¿Está seguro de que desea eliminar el producto seleccionado?'"
+  (confirm)="onDeleteConfirmed()"
+></app-delete-confirmation>
+
+<!-- Modal para editar productos -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Editar Producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form (ngSubmit)="onSubmitEdit()" *ngIf="selectedProduct">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="productName" class="form-label">Nombre</label>
+            <input
+              type="text"
+              id="productName"
+              class="form-control"
+              [(ngModel)]="selectedProduct.Name"
+              name="Name"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="quantity" class="form-label">Cantidad</label>
+            <input
+              type="number"
+              id="quantity"
+              class="form-control"
+              [(ngModel)]="selectedProduct.Quantity"
+              name="Quantity"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="price" class="form-label">Precio</label>
+            <input
+              type="number"
+              id="price"
+              class="form-control"
+              [(ngModel)]="selectedProduct.LastPrice"
+              name="LastPrice"
+              required
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        </div>
+      </form>
+      <div *ngIf="!selectedProduct">
+        <p>No se ha seleccionado ningún producto para editar.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+ 

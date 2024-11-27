@@ -1,0 +1,19 @@
+.modal-header {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .modal-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .modal-footer .btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .modal-footer .btn-secondary:hover {
+    background-color: #d6d6d6;
+  }
+  

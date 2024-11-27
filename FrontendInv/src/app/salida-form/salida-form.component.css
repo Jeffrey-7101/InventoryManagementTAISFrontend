@@ -1,0 +1,41 @@
+.modal-header {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .modal-title {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .form-label {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .table th,
+  .table td {
+    vertical-align: middle;
+  }
+  
+  .btn-info {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+  }
+  
+  .btn-info:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  
+  .text-end p {
+    margin: 0;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .modal-footer .btn {
+    width: 100px;
+  }
+  

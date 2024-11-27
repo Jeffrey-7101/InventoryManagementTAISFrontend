@@ -1,0 +1,102 @@
+<div class="modal fade" id="ingresoModal" tabindex="-1" aria-labelledby="ingresoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="ingresoModalLabel">CREAR NOTA DE INGRESO</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <div class="modal-body">
+          <form>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="codigoIngreso" class="form-label">Código de Ingreso</label>
+                <input
+                  type="text"
+                  id="codigoIngreso"
+                  class="form-control"
+                  [(ngModel)]="codigoIngreso"
+                  name="codigoIngreso"
+                  placeholder="Ingrese código de ingreso"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="fechaIngreso" class="form-label">Fecha de Ingreso</label>
+                <input
+                  type="date"
+                  id="fechaIngreso"
+                  class="form-control"
+                  [(ngModel)]="fechaIngreso"
+                  name="fechaIngreso"
+                />
+              </div>
+            </div>
+  
+            <div class="row align-items-end mb-3">
+              <div class="col-md-6">
+                <label for="producto" class="form-label">Seleccionar Producto</label>
+                <select
+                  id="producto"
+                  class="form-select"
+                  [(ngModel)]="productoSeleccionado"
+                  name="producto"
+                >
+                  <option *ngFor="let producto of productosDisponibles" [value]="producto">
+                    {{ producto }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="cantidad" class="form-label">Cantidad</label>
+                <input
+                  type="number"
+                  id="cantidad"
+                  class="form-control"
+                  [(ngModel)]="cantidad"
+                  name="cantidad"
+                  placeholder="Cantidad"
+                />
+              </div>
+              <div class="col-md-2 text-end">
+                <button type="button" class="btn btn-info w-100" (click)="addProducto()">Añadir</button>
+              </div>
+            </div>
+          </form>
+  
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of productosAgregados; let i = index">
+                <td>{{ item.producto }}</td>
+                <td>{{ item.cantidad }}</td>
+                <td>{{ item.precio | currency }}</td>
+                <td>
+                  <button type="button" class="btn btn-danger btn-sm" (click)="eliminarProducto(i)">
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+  
+          <div class="text-end">
+            <p>Cantidad Total: {{ cantidadTotal }}</p>
+            <p>Precio Total: {{ precioTotal | currency }}</p>
+          </div>
+        </div>
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary">Crear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

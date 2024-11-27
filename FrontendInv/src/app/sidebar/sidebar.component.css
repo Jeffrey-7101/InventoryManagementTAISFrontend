@@ -1,0 +1,35 @@
+
+.sidebar {
+    background-color: #f8f9fa; 
+    height: 100vh;
+    padding-top: 20px;
+    pointer-events: auto;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1); 
+  }
+  
+  .sidebar h4 {
+    text-align: center;
+    font-weight: bold;
+    color: #007bff;
+    padding-bottom: 30px;
+  }
+  
+  .nav-item a {
+    font-size: 1.1rem;
+    padding: 12px 20px;
+  }
+  
+  .nav-item a:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  mat-icon {
+    font-size: 24px; 
+    color: #007bff; 
+  }
+  
+  mat-icon:hover {
+    color: #0056b3;
+  }
+  
+  

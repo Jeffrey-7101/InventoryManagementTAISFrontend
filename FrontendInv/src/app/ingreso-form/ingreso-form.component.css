@@ -1,0 +1,21 @@
+.modal-header {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .modal-title {
+    font-size: 1.5rem;
+  }
+  
+  .table th, .table td {
+    text-align: center;
+  }
+  
+  .table {
+    margin-top: 1rem;
+  }
+  
+  .modal-footer button {
+    padding: 0.5rem 1.5rem;
+  }
+  

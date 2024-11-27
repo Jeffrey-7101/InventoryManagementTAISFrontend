@@ -1,0 +1,48 @@
+  <app-header-salidas></app-header-salidas>
+
+  <div class="table-responsive mt-3">
+    <table class="table table-striped">
+      <thead class="table-primary">
+        <tr>
+          <th>COD</th>
+          <th>C. TOTAL</th>
+          <th>PRECIO TOTAL</th>
+          <th>FECHA</th>
+          <th>ACCIONES</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let salida of salidas">
+          <td>{{ salida.id }}</td>
+          <td>{{ salida.cantidadTotal }}</td>
+          <td>{{ salida.precioTotal | currency:'USD' }}</td>
+          <td>{{ salida.fecha | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <button
+              class="btn btn-warning btn-sm"
+              (click)="editarNota(salida.id)">
+              Modificar
+            </button>
+            <button
+              class="btn btn-danger btn-sm"
+              data-bs-toggle="modal"
+              data-bs-target="#deleteModal"
+              (click)="openDeleteConfirmation(salida.id)">
+              Eliminar
+            </button>
+            <button
+              class="btn btn-secondary btn-sm"
+              (click)="imprimirNota(salida.id)">
+              Imprimir
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-delete-confirmation
+    [title]="'Eliminar Nota de Salida'"
+    [message]="deleteMessage"
+    (confirm)="onDeleteConfirmed()"
+  ></app-delete-confirmation>
