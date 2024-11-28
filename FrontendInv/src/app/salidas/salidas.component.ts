@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { SalidaDialogComponent } from '../salida-dialog/salida-dialog.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-salidas',
@@ -28,7 +28,7 @@ export class SalidasComponent implements OnInit {
   deleteMessage: string = ''; // Mensaje de confirmación para eliminar
   salidaAEliminar: number | null = null; // ID de la nota seleccionada para eliminar
 
-  constructor(private salidaService: SalidaService, public dialog: MatDialog, private snackBar: MatSnackBar // Inyecta MatSnackBar
+  constructor(private salidaService: SalidaService, public dialog: MatDialog, private snackBar: MatSnackBar, private http: HttpClient // Inyecta MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -70,14 +70,21 @@ export class SalidasComponent implements OnInit {
    */
   imprimirNota(id: string): void {
     this.salidaService.getNotaFile(id).subscribe(
-      (file: Blob) => {
-        const blob = new Blob([file], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `Nota_${id}.xlsx`; // Nombre del archivo descargado
-        link.click();
-        window.URL.revokeObjectURL(url); // Liberar memoria
+      (response: any) => {
+        if (response.download_url) {
+          // Realiza una segunda solicitud para descargar el archivo
+          this.http.get(response.download_url, { responseType: 'blob' }).subscribe((blob) => {
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = `Nota_${id}.xlsx`;
+            link.click();
+            window.URL.revokeObjectURL(link.href);
+          });
+        } else {
+          this.snackBar.open('Error: URL de descarga no disponible.', 'Cerrar', {
+            duration: 5000,
+          });
+        }
       },
 
       (error) => {
@@ -97,7 +104,7 @@ export class SalidasComponent implements OnInit {
     const nota = this.salidas.find((salida) => salida.id === id);
     const dialogRef = this.dialog.open(SalidaDialogComponent, {
       width: '600px',
-      data: nota, // Pasar datos al diálogo
+      data: nota,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -126,12 +133,11 @@ export class SalidasComponent implements OnInit {
     this.salidaService.deleteNota(id).subscribe(
       () => {
         alert('Nota eliminada exitosamente.');
-        this.cargarSalidas(); // Recargar las notas después de la eliminación
+        this.cargarSalidas();
       },
       (error) => {
-        // Mostrar el error en un toast
         this.snackBar.open('Error al eliminar la nota: ' + error.message, 'Cerrar', {
-          duration: 5000, // Duración en milisegundos
+          duration: 5000, 
         });
       }
       
