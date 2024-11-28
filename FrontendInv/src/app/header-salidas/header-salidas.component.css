@@ -1,28 +1,28 @@
 .header-salidas {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #007bff; 
-    padding: 10px 20px;
-    color: white;
-    width: 100%; 
-    box-sizing: border-box; 
-  }
-  
-  .header-salidas h3 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .header-salidas button {
-    font-size: 1rem;
-    padding: 5px 15px;
-  }
-  button {
-    background-color: #28a745;
-    border-color: #28a745;
-    font-size: 1rem;
-  }
-  
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007bff; /* Primary color (Bootstrap equivalent) */
+  color: white;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.header-salidas h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0;
+  margin-left: 0.5rem;
+}
+
+.header-salidas button {
+  background-color: #28a745; /* Success color */
+  border-color: #28a745;
+  font-size: 1rem;
+  padding: 5px 15px;
+}
+
+.header-salidas button:hover {
+  background-color: #28a745; /* Maintain hover color consistency */
+  border-color: #28a745;
+}
