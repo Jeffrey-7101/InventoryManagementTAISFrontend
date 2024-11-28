@@ -71,8 +71,8 @@ export class SalidasComponent implements OnInit {
   imprimirNota(id: string): void {
     this.salidaService.getNotaFile(id).subscribe(
       (response: any) => {
+        console.log('Respuesta del backend:', response);
         if (response.download_url) {
-          // Realiza una segunda solicitud para descargar el archivo
           this.http.get(response.download_url, { responseType: 'blob' }).subscribe((blob) => {
             const link = document.createElement('a');
             link.href = window.URL.createObjectURL(blob);
@@ -81,20 +81,22 @@ export class SalidasComponent implements OnInit {
             window.URL.revokeObjectURL(link.href);
           });
         } else {
+          console.error('URL de descarga no encontrada:', response);
           this.snackBar.open('Error: URL de descarga no disponible.', 'Cerrar', {
             duration: 5000,
           });
         }
       },
-
+  
       (error) => {
-        // Mostrar el error en un toast
+        console.error('Error en la solicitud:', error);
         this.snackBar.open('Error al descargar la nota : ' + error.message, 'Cerrar', {
-          duration: 5000, // Duración en milisegundos
+          duration: 5000,
         });
       }
     );
   }
+  
 
   /**
    * Abrir el diálogo de edición para una nota
